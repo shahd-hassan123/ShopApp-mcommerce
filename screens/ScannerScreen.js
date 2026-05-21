@@ -1,74 +1,56 @@
 import React, { useState } from 'react'
-import {
-  View, Text, StyleSheet, TouchableOpacity, Alert
+import {View, Text, StyleSheet, TouchableOpacity, Alert
 } from 'react-native'
 import { CameraView, useCameraPermissions } from 'expo-camera'
 import { supabase } from '../lib/supabase'
-
 export default function ScannerScreen({ navigation }) {
-  const [permission, requestPermission] = useCameraPermissions()
-  const [scanned, setScanned] = useState(false)
-  const [scanning, setScanning] = useState(false)
-
-  if (!permission) {
-    return (
-      <View style={styles.centered}>
-        <Text style={styles.text}>Loading camera...</Text>
-      </View>
-    )
+const [permission, requestPermission] = useCameraPermissions()
+const [scanned, setScanned] = useState(false)
+const [scanning, setScanning] = useState(false)
+if (!permission) {
+return (
+<View style={styles.centered}>
+<Text style={styles.text}>Loading camera...</Text>
+</View>)}
+if (!permission.granted) {
+return (
+<View style={styles.centered}>
+<Text style={styles.scanIcon}>📷</Text>
+<Text style={styles.title}>Camera Access Needed</Text>
+<Text style={styles.text}>Please allow camera access to scan barcodes</Text>
+<TouchableOpacity style={styles.button} onPress={requestPermission}>
+<Text style={styles.buttonText}>Allow Camera</Text>
+</TouchableOpacity>
+</View>)}
+const handleBarCodeScanned = async ({ type, data }) => {
+if (scanned) return
+setScanned(true)
+setScanning(false)
+const { data: products, error } = await supabase
+.from('products')
+.select('*')
+.eq('barcode', data)
+if (error || !products || products.length === 0) {
+Alert.alert(
+'🔍 Barcode Scanned',
+`Code: ${data}\n\nNo product found with this barcode.`,
+[{ text: 'Scan Again', onPress: () => setScanned(false) }]
+)
+} else {
+Alert.alert('✅ Product Found!',
+`${products[0].name}\n$${products[0].price}`,
+[{ text: 'Scan Again', onPress: () => setScanned(false) },{ text: 'Go to Shop', onPress: () => navigation.navigate('Home') }]
+)}
   }
-
-  if (!permission.granted) {
-    return (
-      <View style={styles.centered}>
-        <Text style={styles.scanIcon}>📷</Text>
-        <Text style={styles.title}>Camera Access Needed</Text>
-        <Text style={styles.text}>Please allow camera access to scan barcodes</Text>
-        <TouchableOpacity style={styles.button} onPress={requestPermission}>
-          <Text style={styles.buttonText}>Allow Camera</Text>
-        </TouchableOpacity>
-      </View>
-    )
-  }
-
-  const handleBarCodeScanned = async ({ type, data }) => {
-    if (scanned) return
-    setScanned(true)
-    setScanning(false)
-
-    const { data: products, error } = await supabase
-      .from('products')
-      .select('*')
-      .eq('barcode', data)
-
-    if (error || !products || products.length === 0) {
-      Alert.alert(
-        '🔍 Barcode Scanned',
-        `Code: ${data}\n\nNo product found with this barcode.`,
-        [{ text: 'Scan Again', onPress: () => setScanned(false) }]
-      )
-    } else {
-      Alert.alert(
-        '✅ Product Found!',
-        `${products[0].name}\n$${products[0].price}`,
-        [
-          { text: 'Scan Again', onPress: () => setScanned(false) },
-          { text: 'Go to Shop', onPress: () => navigation.navigate('Home') }
-        ]
-      )
-    }
-  }
-
-  return (
-    <View style={styles.container}>
-
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Text style={styles.backBtn}>← Back</Text>
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Scan Barcode</Text>
-        <View style={{ width: 60 }} />
-      </View>
+return (
+<View style={styles.container}>
+<View style={styles.header}>
+<TouchableOpacity onPress={() => navigation.goBack()}>
+<Text style={styles.backBtn}>← Back</Text>
+</TouchableOpacity>
+<Text style={styles.headerTitle}>Scan Barcode</Text>
+<View style={{ width: 60 }} />
+</View>
       {scanning ? (
         <View style={styles.scannerContainer}>
           <CameraView
