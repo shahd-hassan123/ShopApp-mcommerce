@@ -26,6 +26,7 @@ import SettingsScreen from './screens/SettingsScreen'
 import ProductDetailScreen from './screens/ProductDetailScreen'
 import PaymentScreen from './screens/PaymentScreen'
 import LanguageScreen from './screens/LanguageScreen'
+import AddProductScreen from './screens/AddProductScreen'
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
 const prefix = Linking.createURL('/')
@@ -87,6 +88,7 @@ return (<Stack.Navigator screenOptions={{ headerShown: false }}>
 <Stack.Screen name="ProductDetail" component={ProductDetailScreen} />
 <Stack.Screen name="Payment" component={PaymentScreen} />
 <Stack.Screen name="Language" component={LanguageScreen} />
+<Stack.Screen name="AddProduct" component={AddProductScreen} />
 </Stack.Navigator>)}
 
 export default function App() {const { session, setSession } = useAuthStore()

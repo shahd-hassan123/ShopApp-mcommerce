@@ -122,6 +122,16 @@ onPress={() => navigation.navigate('OrderHistory')}>
 <Text style={[styles.settingLabel, { color: theme.text }]}>{t.orderHistory}</Text>
 </View><Text style={[styles.chevron, { color: theme.textSecondary }]}>›</Text></TouchableOpacity>
 <TouchableOpacity
+  style={[styles.settingRow, styles.settingBorder, { borderBottomColor: theme.border }]}
+  onPress={() => navigation.navigate('AddProduct')}
+>
+  <View style={styles.settingLeft}>
+    <Text style={styles.settingIcon}>➕</Text>
+    <Text style={[styles.settingLabel, { color: theme.text }]}>Add Product</Text>
+  </View>
+  <Text style={[styles.chevron, { color: theme.textSecondary }]}>›</Text>
+</TouchableOpacity>
+<TouchableOpacity
 style={[styles.settingRow, styles.settingBorder, { borderBottomColor: theme.border }]}
 onPress={() => navigation.navigate('StoreLocator')}>
 <View style={styles.settingLeft}>
