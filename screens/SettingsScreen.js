@@ -66,13 +66,9 @@ export default function SettingsScreen({ navigation }) {
       style={[styles.container, { backgroundColor: theme.background }]}
       contentContainerStyle={styles.content}
     >
-
-      {/* Header */}
       <View style={styles.header}>
         <Text style={[styles.headerTitle, { color: theme.text }]}>{t.settings}</Text>
       </View>
-
-      {/* Profile Card */}
       <View style={[styles.profileCard, { backgroundColor: theme.card, borderColor: theme.border }]}>
         <View style={[styles.avatar, { backgroundColor: '#6C63FF' }]}>
           <Text style={styles.avatarText}>
@@ -88,8 +84,6 @@ export default function SettingsScreen({ navigation }) {
           </Text>
         </View>
       </View>
-
-      {/* Appearance */}
       <Text style={[styles.sectionTitle, { color: theme.textSecondary }]}>
         {t.appearance}
       </Text>
@@ -112,8 +106,6 @@ export default function SettingsScreen({ navigation }) {
           />
         </View>
       </View>
-
-      {/* Battery */}
       <Text style={[styles.sectionTitle, { color: theme.textSecondary }]}>
         BATTERY
       </Text>
@@ -124,7 +116,7 @@ export default function SettingsScreen({ navigation }) {
             <View>
               <Text style={[styles.settingLabel, { color: theme.text }]}>Battery Level</Text>
               <Text style={[styles.settingDesc, { color: getBatteryColor() }]}>
-                {getBatteryStatus()}
+  {getBatteryStatus()}
               </Text>
             </View>
           </View>
@@ -137,7 +129,6 @@ export default function SettingsScreen({ navigation }) {
         </View>
       </View>
 
-      {/* Currency */}
       <Text style={[styles.sectionTitle, { color: theme.textSecondary }]}>
         {t.currency}
       </Text>
@@ -158,8 +149,6 @@ export default function SettingsScreen({ navigation }) {
           <Text style={[styles.chevron, { color: theme.textSecondary }]}>›</Text>
         </TouchableOpacity>
       </View>
-
-      {/* Language */}
       <Text style={[styles.sectionTitle, { color: theme.textSecondary }]}>
         {t.language}
       </Text>
@@ -181,7 +170,6 @@ export default function SettingsScreen({ navigation }) {
         </TouchableOpacity>
       </View>
 
-      {/* Navigation */}
       <Text style={[styles.sectionTitle, { color: theme.textSecondary }]}>
         {t.navigation}
       </Text>
@@ -220,7 +208,6 @@ export default function SettingsScreen({ navigation }) {
         </TouchableOpacity>
       </View>
 
-      {/* About */}
       <Text style={[styles.sectionTitle, { color: theme.textSecondary }]}>
         {t.about}
       </Text>
@@ -241,7 +228,6 @@ export default function SettingsScreen({ navigation }) {
         </View>
       </View>
 
-      {/* Sign Out */}
       <TouchableOpacity
         style={[styles.signOutBtn, { borderColor: '#FF4444' }]}
         onPress={handleSignOut}
