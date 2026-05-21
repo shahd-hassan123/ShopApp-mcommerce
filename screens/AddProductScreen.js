@@ -141,7 +141,7 @@ export default function AddProductScreen({ navigation }) {
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
 
-      {/* Header */}
+      
       <View style={[styles.header, { borderBottomColor: theme.border }]}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Text style={styles.backBtn}>← Back</Text>
@@ -152,7 +152,7 @@ export default function AddProductScreen({ navigation }) {
 
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.content}>
 
-        {/* Image Picker */}
+       
         <Text style={[styles.label, { color: theme.text }]}>Product Image</Text>
         <View style={styles.imageSection}>
           {image ? (
@@ -182,7 +182,7 @@ export default function AddProductScreen({ navigation }) {
           )}
         </View>
 
-        {/* Product Name */}
+        
         <Text style={[styles.label, { color: theme.text }]}>Product Name</Text>
         <TextInput
           style={[styles.input, { backgroundColor: theme.inputBg, borderColor: theme.borderInput, color: theme.text }]}
@@ -192,7 +192,7 @@ export default function AddProductScreen({ navigation }) {
           onChangeText={setName}
         />
 
-        {/* Description */}
+        
         <Text style={[styles.label, { color: theme.text }]}>Description</Text>
         <TextInput
           style={[styles.input, styles.textArea, { backgroundColor: theme.inputBg, borderColor: theme.borderInput, color: theme.text }]}
@@ -204,7 +204,7 @@ export default function AddProductScreen({ navigation }) {
           numberOfLines={4}
         />
 
-        {/* Price & Stock */}
+       
         <View style={styles.row}>
           <View style={styles.halfField}>
             <Text style={[styles.label, { color: theme.text }]}>Price ($)</Text>
@@ -230,7 +230,7 @@ export default function AddProductScreen({ navigation }) {
           </View>
         </View>
 
-        {/* Category */}
+
         <Text style={[styles.label, { color: theme.text }]}>Category</Text>
         <View style={styles.categoriesRow}>
           {CATEGORIES.map(cat => (
@@ -253,8 +253,6 @@ export default function AddProductScreen({ navigation }) {
             </TouchableOpacity>
           ))}
         </View>
-
-        {/* Submit Button */}
         <TouchableOpacity
           style={[styles.submitBtn, (loading || uploadingImage) && { opacity: 0.7 }]}
           onPress={handleAddProduct}
